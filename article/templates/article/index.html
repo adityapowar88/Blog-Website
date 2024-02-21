@@ -1,5 +1,62 @@
+
 {% extends "base.html" %}
 
 {% block contents %}
-<h1>this is index page</h1>
+
+
+<div class="container">
+    <div id="slider" class="my-3 w-75  m-auto">
+        <h2 class="mb-4  text-danger .text-lighten-xl text-center">Recent articles</h2>
+        <div class="card shadow">
+            {% include "article/carousel.html" with articles=recent_articles %}   
+        </div>
+    </div>
+    <div id="all_articles" class="my-5">   
+        <h2 class="my-4 text-danger .text-lighten-xl text-center">All Articles</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            {% for article in page_obj %}
+            <div class="col">
+                <div class="card shadow">
+                    <img src="{{ article.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 style="height: 45px;" class="card-title text-dark">{{ article.title | truncatewords:5 }}</h5>
+                        <h6>{{article.pub_date}}</h6>
+                        <p style="height: 80px;" class="card-text">{{ article.content | truncatewords:15 }}</p>
+                        <a href="{% url 'article:single_article' article.id %}" class="float-end text-decoration-none text-danger .text-lighten-xl text-center">Read more</a>
+                        
+                        <div class="float-start text-decoration-none text-danger .text-lighten-xl text-center border-0 " >
+                            <form action="{% url "article:add_watchlist" %}" method="post">      {% comment %}   {% endcomment %}
+                                {% csrf_token %}
+                                <a type="submit" href="{% url "article:watchlist" %}" class="float-start text-decoration-none text-danger .text-lighten-xl text-center border-0 " >Add to Readlist</a>
+                                <input type="hidden" name="title" value="{{item.id}}" required><br>
+                            </form>
+                        </div> 
+
+                    </div>
+                </div>
+            </div> 
+        {% endfor %} 
+    </div>
+</div>
+
+<div>
+  <div class="pagination my-4 justify-content-center">
+    {% if page_obj.has_previous %}
+    <a class='my-0 m-2 p-0 text-danger .text-lighten-xl btn  border-0' href="?page=1">first</a>
+    <a class='my-0 m-2 p-0 text-danger .text-lighten-xl btn  border-0' href="?page={{page_obj.previous_page_number}}">previous</a>
+    {% endif %}
+    <span class='fw-bold'>
+    {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    </span>
+    {% if page_obj.has_next %}
+    <a class='my-0 m-2 p-0 text-danger .text-lighten-xl btn  border-0' href="?page={{page_obj.next_page_number}}">Next</a>
+    <a class='my-0 m-1 p-0 text-danger .text-lighten-xl btn  border-0' href="?page={{page_obj.paginator.num_pages}}">Last ></a>
+    {% endif %}
+  </div>
+</div>
+    
+</div>
+
+ 
+
 {% endblock contents %}

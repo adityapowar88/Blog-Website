@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div style="height: 900px; width:850px; margin-top:100px; border:1px solid gray; border-radius:10% ;background-color:" class="container d-flex justify-content-center p-3 shadow mt-5">
+    <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 class='my-3 fw-bold text-danger .text-lighten-md text-center mt-2'>Edit Your Profile</h3>
+        <div class="form-group my-2"  >
+            <label class='form-label  mx-2 fw-bold text-dark'  for="first_name">First Name</label>
+            <input class='form-control' style='width:700px' type="text" id='first_name' name='first_name' value={{profile.first_name}}>
+        </div>
+        <div class="form-group my-2">
+            <label class='form-label  mx-2 fw-bold text-dark' for="last_name">Last Name</label>
+            <input class='form-control' type="text" id='last_name' name="last_name"value={{profile.last_name}}>
+        </div>
+        <div class="form-group my-2">
+            <label class='form-label  mx-2 fw-bold text-dark' for="contact_number">Contact Number</label>
+            <input class='form-control' type="text" id="contact_number " name="contact_number" value={{profile.contact_number}}>
+        </div>
+        {% if profile.images.url %}
+        <span>
+            <p class=" mx-2 fw-bold text-dark">Curret image</p>
+            <img style="width:10%" class='my-2 mx-3' src="{{profile.images.url}}" alt="">
+        </span>
+        {% endif %}
+        <div class="form-group my-2">
+            <label class='form-label  mx-2 fw-bold text-dark' for="images">Image</label>
+            <input class='form-control' type="file" id='images' name='images'>
+        </div>
+        <div class="form-group my-2">
+            <label class='form-label  mx-2 fw-bold text-dark' for="bio">Bio</label>
+            <textarea class="form-control " id="bio" cols="30" rows="10" name="bio">{{profile.bio}}</textarea>
+        </div>
+        <div class='container text-center'>
+            <button class=' btn btn-outline-danger m-2 col-4' type=" submit">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock contents %}
+

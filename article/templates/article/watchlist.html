@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+<h1>Your Watchlist</h1>
+<ul>
+    {% for item in watchlist_items %}
+        {% comment %} <div id="image" class="col-3"> 
+            <img style="height: 100px;" src="{{item.image.url}}" alt="">
+            </div>
+            <div id="content" class="">  {% endcomment %}
+                <h5>{{item.title}}</h5>
+                <p>{{item.content | truncatewords:10 }}</p>
+                <a href="{% url 'article:remove_watchlist' item.id %}">Remove</a>
+                {% comment %} <a href="{% url "article:single_article" article.id %}">view</a> {% endcomment %}
+
+    {% empty %}
+        <li>No items in your watchlist.</li>
+    {% endfor %}
+</ul>
+
+{% endblock contents %}
+

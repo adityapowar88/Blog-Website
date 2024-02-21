@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div style="height: 600px; width:750px; margin-top:100px; border:1px solid gray; border-radius:10% ;background-color:" class="container d-flex justify-content-center p-3 shadow mt-5">
+    <form action="" method='POST' enctype='multiport/form-data' class='form-group p-3'>
+        <h2 class=" text-center mt-0 text-danger .text-lighten-md">Edit Article</h2> 
+        {% csrf_token %}
+        <div class=" mt-5 border-0 text-decoration-none  m-2 fw-bold text-dark  form-group py-2 form-control col-md-12 col-sm-6 col-lg-4 col-xs-3-offset-4 my-3" style='width:700px; height: 400px; padding-top:20px;'>
+            {{form}}
+        </div>
+        <div class='container text-center'>
+            <button class=' btn btn-outline-danger m-2 col-4' type=" submit">Save</button>
+        </div>
+        </form>
+</div>
+{% endblock contents %}

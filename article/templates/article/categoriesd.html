@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+
+{% block contents %}
+<div class="container">
+    {% if query %}
+    <h4 class='my-4'>result for {{query}}</h4>
+    {% else %}
+    <h2 class='my-4'>Categories : {{category}}</h2>
+    {% endif %}
+    
+    <div class="">
+        {% for article in articles %}
+            <a class="row text-decoration-none text-dark my-4" href="{% url "article:single_article" article.id %}"> 
+                <div class="image col-4"> 
+                    <img style="width:85%" src="{{article.image.url}}" alt="">  
+                </div>
+                <div class="contents col-8">
+                    <h4>{{article.title}}</h4>
+                    <h6>Published on {{ article.pub_date }}</h6> 
+                    <p>{{article.content | truncatewords:100 }}</p> 
+                </div>
+            </a>      
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock contents %}
+

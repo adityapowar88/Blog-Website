@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'article.apps.MyblogsConfig',
+    'article.apps.MyblogsConfig',  ## first main app 
+    'users.apps.UsersConfig',  ## second app for user (register and login)
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'article.views.categories'   ## this is register for the we are retrive the category model data without making context
             ],
         },
     },
@@ -116,9 +118,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' 
+STATICFILES_DIRS = [BASE_DIR/'static']         ## for image stores (images are come while we select the imagefield in models.py)  after this we set urlpatterns in url.py
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "static/media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL="article:index" 
+
+LOGIN_URL='login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'adityapowar8888@gmail.com'  # Enter your Gmail email address
+EMAIL_HOST_PASSWORD ='umhapwqlzjzwpgop'    # Enter your Gmail password or an App Password if 2-step verification is enabled

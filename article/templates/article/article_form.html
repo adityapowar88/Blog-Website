@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div style="height: 605px; width:550px; margin-top:100px; border:1px solid gray; border-radius:10% ;background-color:" class="container d-flex justify-content-center p-3 shadow " >
+    <form action="" method="POST" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <h3 class='my-3 fw-bold text-danger .text-lighten-md text-center mt-2'>Post Your Article</h3>
+        {% for field in form %}
+            <div style="width:500px;" class=" ">
+                <div class="form-label mx-2 fw-bold text-dark "> 
+                    {{field.label}}
+                </div>
+                <div class="form-control border-0 my-1">  
+                    {{field}}
+                </div>  
+            </div>    
+        {% endfor %}   
+        <div class='container text-center'>
+            <button class=' btn btn-outline-danger m-4 col-4' type=" submit">Post</button>
+        </div>    
+    </form>
+</div>
+{% endblock contents %}

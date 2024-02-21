@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block contents %}
+    <div style="height: 400px; width: 330px; margin-top:100px; border:1px solid gray; border-radius:10% ;background-color:" class="container d-flex justify-content-center p-3 shadow "> 
+        <div class="login-form"> 
+            <h2 class='my-3 fw-bold text-danger .text-lighten-md text-center'>Login!</h2>
+            <form action="" method = "POST">
+                {% csrf_token %}
+                <div class= 'username'>
+                    <div class="form-label mx-2 fw-bold text-dark">
+                        {{form.username.label}}
+                    </div>
+                    <div class="form-control border-0 rounded-2">
+                        {{form.username}} 
+                    </div> 
+                </div> 
+                <div class= 'password'>
+                    <div class="form-label mx-2 fw-bold text-dark">
+                        {{form.password.label}}
+                    </div>
+                    <div class="form-control border-0 rounded-2">
+                        {{form.password}} 
+                    </div> 
+                </div>
+                <div class='container text-center'>
+                    <button class="btn btn-outline-danger m-3" type="submit">Login</button> 
+                </div>
+            </form>
+    
+            <div class="d-flex ">
+                <h6 class='mt-2 fw-semibold mx-2'>Dont have an account?</h6>
+                <a class='mx-1 mt-1 fs-7' href="{% url "RegisterView" %}">Register</a> 
+            </div>
+            <a href="{% url "password_reset" %}" class="mx-2">forget password</a>
+        </div>
+        
+    </div>
+{% endblock contents %}
+
